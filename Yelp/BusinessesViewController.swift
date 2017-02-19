@@ -18,6 +18,7 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     var currentLocation: CLLocation?
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var mapButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +39,8 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         searchBar.sizeToFit()
         searchBar.delegate = self
         navigationItem.titleView = searchBar
+        
+        navigationItem.leftBarButtonItem = mapButton
         
         /* Example of Yelp search with more search options specified
          Business.searchWithTerm("Restaurants", sort: .Distance, categories: ["asianfusion", "burgers"], deals: true) { (businesses: [Business]!, error: NSError!) -> Void in
@@ -125,14 +128,15 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         )
     }
     
-    /*
+    
      // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "map" {
+            let destinationViewController = segue.destination.childViewControllers[0] as! MapViewController
+            destinationViewController.currentLocation = currentLocation
+            destinationViewController.businesses = businesses
+        }
+    }
     
 }

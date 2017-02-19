@@ -51,6 +51,7 @@ class YelpClient: BDBOAuth1RequestOperationManager {
     func searchWithTerm(_ term: String, _ location: CLLocation, sort: YelpSortMode?, categories: [String]?, deals: Bool?, completion: @escaping ([Business]?, Error?) -> Void) -> AFHTTPRequestOperation {
         // For additional parameters, see http://www.yelp.com/developers/documentation/v2/search_api
         
+                                                                        //two lower-case Ls, not eleven
         var parameters: [String : AnyObject] = ["term": term as AnyObject, "ll": "\(location.coordinate.latitude),\(location.coordinate.longitude)" as AnyObject]
         
         if sort != nil {

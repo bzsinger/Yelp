@@ -11,6 +11,7 @@ import CoreLocation
 
 class Business: NSObject {
     let name: String?
+    let coorLocation: CLLocationCoordinate2D?
     let address: String?
     let imageURL: URL?
     let categories: String?
@@ -30,7 +31,16 @@ class Business: NSObject {
         
         let location = dictionary["location"] as? NSDictionary
         var address = ""
+        //print(dictionary)
+        var coorLocation = CLLocationCoordinate2D(latitude: 0, longitude: 0)
         if location != nil {
+            let coordinates = location!["coordinate"] as? NSDictionary
+            let coorLatitude = coordinates?["latitude"] as? Double
+            let coorLongitude = coordinates?["longitude"] as? Double
+            if coordinates != nil {
+                coorLocation = CLLocationCoordinate2D(latitude: coorLatitude!, longitude: coorLongitude!)
+            }
+            
             let addressArray = location!["address"] as? NSArray
             if addressArray != nil && addressArray!.count > 0 {
                 address = addressArray![0] as! String
@@ -45,6 +55,7 @@ class Business: NSObject {
             }
         }
         self.address = address
+        self.coorLocation = coorLocation
         
         let categoriesArray = dictionary["categories"] as? [[String]]
         if categoriesArray != nil {
