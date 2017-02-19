@@ -134,8 +134,8 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "map" {
             let destinationViewController = segue.destination.childViewControllers[0] as! MapViewController
-            destinationViewController.currentLocation = currentLocation
             destinationViewController.businesses = businesses
+            destinationViewController.currentLocation = currentLocation
         }
     }
     

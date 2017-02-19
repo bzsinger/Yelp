@@ -8,22 +8,28 @@
 
 import UIKit
 import MapKit
+import Contacts
 
 class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
-    var currentLocation: CLLocation!
     var businesses: [Business]!
+    var currentLocation: CLLocation?
+
+    @IBOutlet weak var detailView: UIView!
+    @IBOutlet weak var detailViewLabel: UILabel!
     
     var thumbnailImageByAnnotation = [NSValue : UIImage]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        detailView.isHidden = true
+        
         mapView.delegate = self
-        let mapCenter = currentLocation.coordinate
+        let mapCenter = currentLocation
         let mapSpan = MKCoordinateSpan(latitudeDelta: 0.015, longitudeDelta: 0.015)
-        let region = MKCoordinateRegion(center: mapCenter, span: mapSpan)
+        let region = MKCoordinateRegion(center: mapCenter!.coordinate, span: mapSpan)
         mapView.setRegion(region, animated: false)
         
         addPins()
@@ -67,6 +73,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if annotation.isKind(of: MKUserLocation.self) {
+            return nil
+        }
         let reuseID = "myAnnotationView"
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseID)
         if annotationView == nil {
@@ -79,8 +88,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         annotationView?.image = getOurThumbnailForAnnotation(annotation: annotation)
         
         /// Add an info button to the callout "bubble" of the annotation view
-        //let rightCalloutButton = UIButton(type: .detailDisclosure)
-        //annotationView?.rightCalloutAccessoryView = rightCalloutButton
+        let rightCalloutButton = UIButton(type: .detailDisclosure)
+        annotationView?.rightCalloutAccessoryView = rightCalloutButton
         
         /// Add image to the callout "bubble" of the annotation view
         let image = getOurThumbnailForAnnotation(annotation: annotation)
@@ -88,6 +97,28 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         annotationView?.leftCalloutAccessoryView = leftCalloutImageView
         
         return annotationView
+    }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        let placeName = view.annotation?.title!!
+        let destinationCoors = (view.annotation?.coordinate)!
+        
+        detailView.isHidden = false
+        detailViewLabel.text = placeName
+        
+        let destPlacemark = MKPlacemark(coordinate: destinationCoors, addressDictionary: nil)
+        let destination = MKMapItem(placemark: destPlacemark)
+        destination.name = placeName
+        
+        let destinationLocation = CLLocation(latitude: destinationCoors.latitude, longitude: destinationCoors.longitude)
+        let launchOptions: [String : Any]!
+        if (mapView.userLocation.location?.distance(from: destinationLocation))! < CLLocationDistance(1610.0) {
+            launchOptions = [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeWalking]
+        } else {
+            launchOptions = [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving]
+        }
+        
+        destination.openInMaps(launchOptions: launchOptions)
     }
 
     /*
