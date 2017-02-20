@@ -142,6 +142,15 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
             let destinationViewController = segue.destination.childViewControllers[0] as! MapViewController
             destinationViewController.businesses = businesses
             destinationViewController.currentLocation = currentLocation
+        } else if segue.identifier == "detail" {
+            let cell = sender as! UITableViewCell
+            let indexPath = tableView.indexPath(for: cell)
+            let business = businesses![indexPath!.row]
+            
+            let destinationViewController = segue.destination as! BusinessDetailViewController
+            destinationViewController.business = business
+            tableView.deselectRow(at: indexPath!, animated: true)
+            destinationViewController.currentLocation = currentLocation
         }
     }
     

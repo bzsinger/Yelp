@@ -108,6 +108,7 @@
                                             <outlet property="ratingImageView" destination="7l4-3S-yIt" id="JqY-5v-sDv"/>
                                             <outlet property="reviewsCountLabel" destination="M90-bY-Wj0" id="e6R-fq-6Qz"/>
                                             <outlet property="thumbImageView" destination="emc-ye-x7x" id="3Np-cB-Pid"/>
+                                            <segue destination="LsW-wC-FK0" kind="show" identifier="detail" id="dLc-gm-5bL"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -227,34 +228,24 @@
                                         <color key="textColor" red="0.60000002379999995" green="0.60000002379999995" blue="0.60000002379999995" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="$$" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a7t-BZ-mZA">
-                                        <rect key="frame" x="299" y="29" width="17" height="16"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <color key="textColor" red="0.60000002379999995" green="0.60000002379999995" blue="0.60000002379999995" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="q02-Yo-h8I" firstAttribute="centerY" secondItem="1u4-hJ-FkI" secondAttribute="centerY" id="1cW-rQ-dl4"/>
                                     <constraint firstItem="hrL-SA-kRD" firstAttribute="top" secondItem="kzN-Dt-v4O" secondAttribute="top" id="4QX-5J-Rwr"/>
-                                    <constraint firstItem="a7t-BZ-mZA" firstAttribute="centerY" secondItem="q02-Yo-h8I" secondAttribute="centerY" id="Amj-2V-WqA"/>
                                     <constraint firstAttribute="trailing" secondItem="hrL-SA-kRD" secondAttribute="trailing" id="ArK-tT-FqB"/>
                                     <constraint firstItem="4Ka-Wv-Nl3" firstAttribute="leading" secondItem="kzN-Dt-v4O" secondAttribute="leading" constant="8" id="EpD-tV-dls"/>
                                     <constraint firstItem="D01-re-NVI" firstAttribute="leading" secondItem="4Ka-Wv-Nl3" secondAttribute="trailing" constant="8" id="Hbg-x4-dCo"/>
                                     <constraint firstItem="q02-Yo-h8I" firstAttribute="leading" secondItem="1u4-hJ-FkI" secondAttribute="trailing" constant="8" id="Hll-g9-nad"/>
                                     <constraint firstItem="1u4-hJ-FkI" firstAttribute="leading" secondItem="4Ka-Wv-Nl3" secondAttribute="trailing" constant="8" id="O3A-Yf-bev"/>
-                                    <constraint firstItem="a7t-BZ-mZA" firstAttribute="leading" secondItem="q02-Yo-h8I" secondAttribute="trailing" constant="8" id="OZ6-lf-wz3"/>
                                     <constraint firstItem="oXY-66-vtq" firstAttribute="centerX" secondItem="kzN-Dt-v4O" secondAttribute="centerX" id="Twv-pI-NE5"/>
                                     <constraint firstAttribute="bottom" secondItem="oXY-66-vtq" secondAttribute="bottom" constant="8" id="VX1-OK-Ewa"/>
-                                    <constraint firstItem="a7t-BZ-mZA" firstAttribute="top" secondItem="zge-MU-7rT" secondAttribute="bottom" constant="3" id="Zfc-Gc-ZXq"/>
                                     <constraint firstItem="D01-re-NVI" firstAttribute="top" secondItem="kzN-Dt-v4O" secondAttribute="top" constant="8" id="buL-ZK-s2I"/>
                                     <constraint firstItem="mNM-0f-s7z" firstAttribute="top" secondItem="1u4-hJ-FkI" secondAttribute="bottom" constant="4" id="ek2-Ve-78R"/>
                                     <constraint firstItem="hrL-SA-kRD" firstAttribute="leading" secondItem="zge-MU-7rT" secondAttribute="trailing" constant="8" id="gAA-pK-tiG"/>
                                     <constraint firstItem="mNM-0f-s7z" firstAttribute="leading" secondItem="4Ka-Wv-Nl3" secondAttribute="trailing" constant="8" id="gQi-SC-rHd"/>
                                     <constraint firstItem="zge-MU-7rT" firstAttribute="top" secondItem="kzN-Dt-v4O" secondAttribute="top" constant="10" id="hcf-Jq-k8R"/>
                                     <constraint firstItem="RSa-IU-4fK" firstAttribute="leading" secondItem="mNM-0f-s7z" secondAttribute="leading" id="jMA-JZ-3Ay"/>
-                                    <constraint firstAttribute="trailing" secondItem="a7t-BZ-mZA" secondAttribute="trailing" constant="27" id="kVW-xX-IlU"/>
                                     <constraint firstItem="1u4-hJ-FkI" firstAttribute="top" secondItem="D01-re-NVI" secondAttribute="bottom" constant="4" id="sKT-hE-OSB"/>
                                     <constraint firstItem="4Ka-Wv-Nl3" firstAttribute="top" secondItem="kzN-Dt-v4O" secondAttribute="top" constant="8" id="tVP-j6-hVx"/>
                                     <constraint firstItem="RSa-IU-4fK" firstAttribute="top" secondItem="mNM-0f-s7z" secondAttribute="bottom" constant="2" id="wyI-k7-wep"/>
@@ -313,6 +304,123 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S6r-4r-Q04" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1788" y="357.57121439280365"/>
+        </scene>
+        <!--Business Detail View Controller-->
+        <scene sceneID="TrM-oZ-vwY">
+            <objects>
+                <viewController id="LsW-wC-FK0" customClass="BusinessDetailViewController" customModule="Yelp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="OS6-wj-HZh"/>
+                        <viewControllerLayoutGuide type="bottom" id="aW3-Eh-FXQ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="WPm-1U-hQQ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vTg-4W-YM7">
+                                <rect key="frame" x="0.0" y="64" width="375" height="375"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="375" id="RAG-qD-Q6v"/>
+                                    <constraint firstAttribute="width" constant="375" id="SAP-CF-OmH"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TCU-SZ-Qo3">
+                                <rect key="frame" x="146" y="479" width="83" height="15"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="83" id="dfB-JB-ytt"/>
+                                    <constraint firstAttribute="height" constant="15" id="wG6-1E-NiX"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Grand Pu Bah" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pgt-nm-hKE">
+                                <rect key="frame" x="8" y="447" width="359" height="24"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="88 Division St, Mission Bay" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CIw-gF-c3b">
+                                <rect key="frame" x="16" y="524" width="343" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thai, Seafood, Salad" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="brj-tO-Gxr">
+                                <rect key="frame" x="16" y="550" width="343" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" red="0.60000002379999995" green="0.60000002379999995" blue="0.60000002379999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="0.07 mi" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Az-kk-6Sv">
+                                <rect key="frame" x="16" y="574" width="343" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" red="0.60000002379999995" green="0.60000002379999995" blue="0.60000002379999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Osj-wj-dFa">
+                                <rect key="frame" x="138" y="617" width="98" height="30"/>
+                                <state key="normal" title="Get Directions"/>
+                                <connections>
+                                    <action selector="getDirectionsButtonClicked:" destination="LsW-wC-FK0" eventType="touchUpInside" id="6av-H3-Rz2"/>
+                                    <action selector="getDirectionsButtonClicked:" destination="QYl-3L-BCT" eventType="touchUpInside" id="xVY-Xv-Qpv"/>
+                                </connections>
+                            </button>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="r56-1y-f7R">
+                                <rect key="frame" x="215" y="279" width="160" height="160"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="160" id="6OK-7K-MME"/>
+                                    <constraint firstAttribute="width" constant="160" id="VXs-TV-5pr"/>
+                                </constraints>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3BQ-2N-S3z">
+                                <rect key="frame" x="148" y="495" width="78" height="28"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <state key="normal" title="469 Reviews"/>
+                                <connections>
+                                    <action selector="detailRatingsButtonClicked:" destination="LsW-wC-FK0" eventType="touchUpInside" id="2Cl-Ms-ZIc"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="CIw-gF-c3b" secondAttribute="trailing" constant="16" id="0Wf-MK-lfC"/>
+                            <constraint firstItem="brj-tO-Gxr" firstAttribute="leading" secondItem="WPm-1U-hQQ" secondAttribute="leading" constant="16" id="2fs-Nm-tEW"/>
+                            <constraint firstAttribute="trailing" secondItem="0Az-kk-6Sv" secondAttribute="trailing" constant="16" id="3fb-1o-BXE"/>
+                            <constraint firstItem="TCU-SZ-Qo3" firstAttribute="centerX" secondItem="WPm-1U-hQQ" secondAttribute="centerX" id="6ei-OE-EgM"/>
+                            <constraint firstItem="pgt-nm-hKE" firstAttribute="leading" secondItem="WPm-1U-hQQ" secondAttribute="leading" constant="8" id="AdM-FV-SB8"/>
+                            <constraint firstAttribute="trailing" secondItem="brj-tO-Gxr" secondAttribute="trailing" constant="16" id="DjU-Qk-3ja"/>
+                            <constraint firstItem="r56-1y-f7R" firstAttribute="top" secondItem="vTg-4W-YM7" secondAttribute="bottom" constant="-160" id="HLo-F3-t2N"/>
+                            <constraint firstItem="3BQ-2N-S3z" firstAttribute="centerX" secondItem="WPm-1U-hQQ" secondAttribute="centerX" id="RKg-B5-A9r"/>
+                            <constraint firstItem="0Az-kk-6Sv" firstAttribute="centerX" secondItem="WPm-1U-hQQ" secondAttribute="centerX" id="Xp2-0Q-21z"/>
+                            <constraint firstItem="pgt-nm-hKE" firstAttribute="top" secondItem="vTg-4W-YM7" secondAttribute="bottom" constant="8" id="YHL-Gz-V4W"/>
+                            <constraint firstItem="vTg-4W-YM7" firstAttribute="top" secondItem="OS6-wj-HZh" secondAttribute="bottom" id="YUu-YC-z99"/>
+                            <constraint firstItem="3BQ-2N-S3z" firstAttribute="top" secondItem="TCU-SZ-Qo3" secondAttribute="bottom" constant="1" id="Zbi-DG-sei"/>
+                            <constraint firstItem="vTg-4W-YM7" firstAttribute="leading" secondItem="WPm-1U-hQQ" secondAttribute="leading" id="Zho-tl-5QU"/>
+                            <constraint firstItem="CIw-gF-c3b" firstAttribute="top" secondItem="3BQ-2N-S3z" secondAttribute="bottom" constant="1" id="aM4-pb-ioE"/>
+                            <constraint firstItem="brj-tO-Gxr" firstAttribute="top" secondItem="CIw-gF-c3b" secondAttribute="bottom" constant="8" id="ahd-DR-GIC"/>
+                            <constraint firstItem="TCU-SZ-Qo3" firstAttribute="top" secondItem="pgt-nm-hKE" secondAttribute="bottom" constant="8" id="d0w-zC-F4r"/>
+                            <constraint firstAttribute="trailing" secondItem="pgt-nm-hKE" secondAttribute="trailing" constant="8" id="exU-UU-gad"/>
+                            <constraint firstItem="r56-1y-f7R" firstAttribute="leading" secondItem="vTg-4W-YM7" secondAttribute="trailing" constant="-160" id="fut-rV-phA"/>
+                            <constraint firstItem="CIw-gF-c3b" firstAttribute="leading" secondItem="WPm-1U-hQQ" secondAttribute="leading" constant="16" id="oM1-Le-I5H"/>
+                            <constraint firstItem="Osj-wj-dFa" firstAttribute="centerX" secondItem="WPm-1U-hQQ" secondAttribute="centerX" id="scm-ha-Jhy"/>
+                            <constraint firstItem="0Az-kk-6Sv" firstAttribute="top" secondItem="brj-tO-Gxr" secondAttribute="bottom" constant="8" id="slu-uE-fDo"/>
+                            <constraint firstItem="0Az-kk-6Sv" firstAttribute="leading" secondItem="WPm-1U-hQQ" secondAttribute="leading" constant="16" id="yQ3-Qs-L8L"/>
+                            <constraint firstItem="aW3-Eh-FXQ" firstAttribute="top" secondItem="Osj-wj-dFa" secondAttribute="bottom" constant="20" id="zxO-D3-slR"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="detailAddressLabel" destination="CIw-gF-c3b" id="eRx-JO-HYk"/>
+                        <outlet property="detailBusinessLabel" destination="pgt-nm-hKE" id="8ZS-bn-wAo"/>
+                        <outlet property="detailCategoriesLabel" destination="brj-tO-Gxr" id="oNl-jW-X8w"/>
+                        <outlet property="detailDistanceLabel" destination="0Az-kk-6Sv" id="lik-lZ-Z6y"/>
+                        <outlet property="detailImageView" destination="vTg-4W-YM7" id="t2F-W0-fBl"/>
+                        <outlet property="detailRatingsButton" destination="3BQ-2N-S3z" id="nPb-i7-HBx"/>
+                        <outlet property="detailRatingsImageView" destination="TCU-SZ-Qo3" id="ZX6-4a-0zz"/>
+                        <outlet property="mapView" destination="r56-1y-f7R" id="VNu-Nq-t6J"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9Oo-Dp-EmQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2725.5999999999999" y="-353.07346326836586"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="C80-t4-IHL">

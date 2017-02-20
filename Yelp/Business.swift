@@ -18,6 +18,7 @@ class Business: NSObject {
     let distance: String?
     let ratingImageURL: URL?
     let reviewCount: NSNumber?
+    let mobileURL: URL?
     
     init(dictionary: NSDictionary) {
         name = dictionary["name"] as? String
@@ -31,7 +32,7 @@ class Business: NSObject {
         
         let location = dictionary["location"] as? NSDictionary
         var address = ""
-        //print(dictionary)
+        
         var coorLocation = CLLocationCoordinate2D(latitude: 0, longitude: 0)
         if location != nil {
             let coordinates = location!["coordinate"] as? NSDictionary
@@ -85,6 +86,8 @@ class Business: NSObject {
         }
         
         reviewCount = dictionary["review_count"] as? NSNumber
+        
+        mobileURL = NSURL(string: dictionary["mobile_url"] as! String) as! URL
     }
     
     class func businesses(array: [NSDictionary]) -> [Business] {
