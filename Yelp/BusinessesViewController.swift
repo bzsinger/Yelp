@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreLocation
+import MBProgressHUD
 
 class BusinessesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, CLLocationManagerDelegate {
     
@@ -22,6 +23,8 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        MBProgressHUD.showAdded(to: self.view, animated: true)
         
         //https://guides.codepath.com/ios/Using-MapKit
         locationManager = CLLocationManager()
@@ -41,6 +44,7 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         navigationItem.titleView = searchBar
         
         navigationItem.leftBarButtonItem = mapButton
+        mapButton.isEnabled = false
         
         /* Example of Yelp search with more search options specified
          Business.searchWithTerm("Restaurants", sort: .Distance, categories: ["asianfusion", "burgers"], deals: true) { (businesses: [Business]!, error: NSError!) -> Void in
@@ -52,7 +56,6 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
          }
          }
          */
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -62,6 +65,8 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if businesses != nil {
+            MBProgressHUD.hide(for: self.view, animated: true)
+            mapButton.isEnabled = true
             return businesses!.count
         } else {
             return 0
@@ -133,6 +138,7 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "map" {
+            MBProgressHUD.showAdded(to: self.view, animated: true)
             let destinationViewController = segue.destination.childViewControllers[0] as! MapViewController
             destinationViewController.businesses = businesses
             destinationViewController.currentLocation = currentLocation

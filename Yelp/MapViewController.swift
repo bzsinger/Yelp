@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import MBProgressHUD
 
 class MapViewController: UIViewController, MKMapViewDelegate {
     
@@ -33,6 +34,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        MBProgressHUD.showAdded(to: self.view, animated: true)
         detailView.isHidden = true
         detailView.layer.cornerRadius = 8.0
         
@@ -43,6 +45,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         mapView.setRegion(region, animated: false)
         
         addPins()
+        MBProgressHUD.hide(for: self.view, animated: true)
     }
 
     override func didReceiveMemoryWarning() {
