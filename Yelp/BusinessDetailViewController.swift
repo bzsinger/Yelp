@@ -37,7 +37,7 @@ class BusinessDetailViewController: UIViewController, MKMapViewDelegate {
         detailImageView.setImageWith(URL(string: fullSizeURL)!)
         detailAddressLabel.text = business.address!
         detailDistanceLabel.text = business.distance!
-        detailRatingsButton.titleLabel?.text = "\(business.reviewCount!) Reviews"
+        detailRatingsButton.setTitle("\(business.reviewCount!) Reviews", for: .normal)
         detailRatingsImageView.setImageWith(business.ratingImageURL!)
         detailCategoriesLabel.text = business.categories!
         

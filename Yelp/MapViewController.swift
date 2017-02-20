@@ -68,15 +68,17 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             
             //needed to get all images for annotations
             let url = businesses[i].imageURL
-            let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
-            resizeRenderImageView.image = UIImage(data: data!)
+            if (url != nil) {
+                let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
+                resizeRenderImageView.image = UIImage(data: data!)
             
-            UIGraphicsBeginImageContextWithOptions(resizeRenderImageView.frame.size, false, 0.0)
-            resizeRenderImageView.layer.render(in: UIGraphicsGetCurrentContext()!)
-            let thumbnail = UIGraphicsGetImageFromCurrentImageContext()
-            UIGraphicsEndImageContext()
+                UIGraphicsBeginImageContextWithOptions(resizeRenderImageView.frame.size, false, 0.0)
+                resizeRenderImageView.layer.render(in: UIGraphicsGetCurrentContext()!)
+                let thumbnail = UIGraphicsGetImageFromCurrentImageContext()
+                UIGraphicsEndImageContext()
             
-            thumbnailImageByAnnotation[NSValue(nonretainedObject: annotation)] = thumbnail
+                thumbnailImageByAnnotation[NSValue(nonretainedObject: annotation)] = thumbnail
+            }
             
             mapView.addAnnotation(annotation)
         }

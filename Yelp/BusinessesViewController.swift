@@ -13,13 +13,14 @@ import MBProgressHUD
 class BusinessesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, CLLocationManagerDelegate {
     
     var businesses: [Business]!
-    var filteredBusinesses: [Business]!
     
     var locationManager : CLLocationManager!
     var currentLocation: CLLocation?
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var mapButton: UIBarButtonItem!
+    
+    var searchTerm = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -86,19 +87,21 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.isEmpty {
-            filteredBusinesses = businesses
+            searchTerm = ""
             return
+        } else {
+            searchTerm = searchText
         }
         
-        /*Business.searchWithTerm(term: "Thai", completion: { (businesses: [Business]?, error: Error?) -> Void in
-            self.businesses = businesses
-            self.tableView.reloadData()
-            
-            }
-        )*/
+        search()
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if searchBar.text == nil || searchBar.text!.isEmpty {
+            searchTerm = ""
+            search()
+            return
+        }
         searchBar.showsCancelButton = false
         searchBar.resignFirstResponder()
     }
@@ -109,28 +112,29 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         searchBar.resignFirstResponder()
     }
     
+    func search() {
+        Business.searchWithTerm(term: searchTerm, location: currentLocation!, completion: { (businesses: [Business]?, error: Error?) -> Void in
+            self.businesses = businesses
+            self.tableView.reloadData()
+            
+        }
+        )
+    }
+    
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         if status == CLAuthorizationStatus.authorizedWhenInUse {
             manager.startUpdatingLocation()
         }
         else if status == CLAuthorizationStatus.denied {
             currentLocation = CLLocation(latitude: 37.785771, longitude: -122.406165) // Default the location to San Francisco
-            Business.searchWithTerm(term: "", location: currentLocation!, completion: { (businesses: [Business]?, error: Error?) -> Void in
-                self.businesses = businesses
-                self.tableView.reloadData()
-            }
-            )
+            search()
             
         }
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         currentLocation = locations[0]
-        Business.searchWithTerm(term: "", location: currentLocation!, completion: { (businesses: [Business]?, error: Error?) -> Void in
-            self.businesses = businesses
-            self.tableView.reloadData()
-        }
-        )
+        search()
     }
     
     
