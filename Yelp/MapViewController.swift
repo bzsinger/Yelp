@@ -8,7 +8,6 @@
 
 import UIKit
 import MapKit
-import Contacts
 
 class MapViewController: UIViewController, MKMapViewDelegate {
     
@@ -18,13 +17,24 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 
     @IBOutlet weak var detailView: UIView!
     @IBOutlet weak var detailViewLabel: UILabel!
+    @IBOutlet weak var detailImageView: UIImageView!
+    @IBOutlet weak var detailRatingsImageView: UIImageView!
+    @IBOutlet weak var detailReviewsLabel: UILabel!
+    @IBOutlet weak var detailAddressLabel: UILabel!
+    @IBOutlet weak var detailCategoriesView: UILabel!
+    @IBOutlet weak var detailDistanceView: UILabel!
+    
     
     var thumbnailImageByAnnotation = [NSValue : UIImage]()
+    
+    var currentAnnotation: BusinessAnnotation!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         detailView.isHidden = true
+        detailView.layer.cornerRadius = 8.0
         
         mapView.delegate = self
         let mapCenter = currentLocation
@@ -42,7 +52,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     func addPins() {
         for i in 0..<businesses.count {
-            let annotation = MKPointAnnotation()
+            let annotation = BusinessAnnotation()
+            annotation.business = businesses[i]
             let locationCoordinate = businesses[i].coorLocation
             annotation.coordinate = locationCoordinate!
             annotation.title = businesses[i].name!
@@ -100,11 +111,30 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        let placeName = view.annotation?.title!!
-        let destinationCoors = (view.annotation?.coordinate)!
+        if (view.annotation?.isKind(of: MKUserLocation.self))! {
+            return
+        }
+        
+        currentAnnotation = view.annotation! as! BusinessAnnotation
+        
+        let placeName = currentAnnotation.title!
         
         detailView.isHidden = false
         detailViewLabel.text = placeName
+        detailImageView.setImageWith(currentAnnotation.business.imageURL!)
+        detailAddressLabel.text = currentAnnotation.business.address!
+        detailDistanceView.text = currentAnnotation.business.distance!
+        detailReviewsLabel.text = "\(currentAnnotation.business.reviewCount!) Reviews"
+        detailRatingsImageView.setImageWith(currentAnnotation.business.ratingImageURL!)
+        detailCategoriesView.text = currentAnnotation.business.categories!
+        
+        detailView.frame.size.height = detailCategoriesView.frame.size.height * 5
+        
+    }
+    
+    @IBAction func getDirectionsButtonClicked(_ sender: Any) {
+        let placeName = currentAnnotation.business.name!
+        let destinationCoors = currentAnnotation.coordinate
         
         let destPlacemark = MKPlacemark(coordinate: destinationCoors, addressDictionary: nil)
         let destination = MKMapItem(placemark: destPlacemark)
@@ -119,8 +149,22 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         }
         
         destination.openInMaps(launchOptions: launchOptions)
-    }
 
+    }
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        detailView.isHidden = true
+    }
+    
+    func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
+        detailView.isHidden = true
+    }
+    
+    @IBAction func closeButtonClicked(_ sender: Any) {
+        detailView.isHidden = true
+    }
+    
+    
     /*
     // MARK: - Navigation
 
