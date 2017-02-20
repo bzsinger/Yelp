@@ -44,6 +44,8 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 Describe any challenges encountered while building the app.
 
+I found MapKit especially challenging – I spent most of the time on this app customizing the map UI. I also found the system for API access more difficult to understand this time around.
+
 ## License
 
     Copyright 2017 Benjamin Singer
