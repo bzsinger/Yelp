@@ -1,36 +1,6 @@
-# Project 3 - Yelp
+# Yelp
 
 Yelp is a Yelp search app using the [Yelp API](http://www.yelp.com/developers/documentation/v2/search_api).
-
-Time spent: 15 hours spent in total
-
-## User Stories
-
-The following **required** functionality is completed:
-
-- [X] Table rows for search results should be dynamic height according to the content height.
-- [X] Custom cells should have the proper Auto Layout constraints.
-- [X] Search bar should be in the navigation bar (doesn't have to expand to show location like the real Yelp app does).
-
-The following **optional** features are implemented:
-
-- [X] Search results page
-- [ ] Infinite scroll for restaurant results.
-- [X] Implement map view of restaurant results.
-- [X] Implement the restaurant detail page.
-
-The following **additional** features are implemented:
-
-- [X] Customized UI of map view
-- [X] Added 'Get Directions' feature (walking v. driving based on distance away)
-- [X] Added loading indicator
-- [X] Load businesses based off of user's **current** location
-
-Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
-
-1. UI design for detail view
-2. Extend MapView to show directions in-app
-3. Optimize search and expand use of API
 
 ## Video Walkthrough 
 
@@ -40,11 +10,23 @@ Here's a walkthrough of implemented user stories:
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
-## Notes
+## User Stories
 
-Describe any challenges encountered while building the app.
+🎉 The following functionality is completed: 🎉
 
-I found MapKit especially challenging – I spent most of the time on this app customizing the map UI. I also found the system for API access more difficult to understand this time around.
+- [X] Table rows for search results should be dynamic height according to the content height.
+- [X] Custom cells should have the proper Auto Layout constraints.
+- [X] Search bar should be in the navigation bar (doesn't have to expand to show location like the real Yelp app does).
+- [X] Search results page
+- [X] Implement map view of restaurant results.
+- [X] Implement the restaurant detail page.
+- [X] Customized UI of map view
+- [X] Added 'Get Directions' feature (walking v. driving based on distance away)
+- [X] Added loading indicator
+- [X] Load businesses based off of user's **current** location
+
+🚫 The following functionality is under construction: 🔨
+- [ ] Infinite scroll for restaurant results.
 
 ## License
 
